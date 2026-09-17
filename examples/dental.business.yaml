@@ -1,0 +1,93 @@
+business:
+  name: "Brightside Family Dental"
+  industry: dental
+  description: "General and family dentistry, two chairs, walk-ins welcome for emergencies."
+  phone: "555-330-7200"
+  email: "front-desk@brightsidedental.example"
+  website: "https://brightsidedental.example"
+  address:
+    street: "44 Union Avenue"
+    city: "Peekskill"
+    state: "NY"
+    zip: "10566"
+
+hours:
+  timezone: "America/New_York"
+  schedule:
+    mon: [{ open: "08:00", close: "17:00" }]
+    tue: [{ open: "08:00", close: "17:00" }]
+    wed: [{ open: "08:00", close: "17:00" }]
+    thu: [{ open: "08:00", close: "19:00" }]
+    fri: [{ open: "08:00", close: "13:00" }]
+    sat: []
+    sun: []
+  exceptions: []
+
+offerings:
+  - id: "svc-cleaning"
+    name: "Routine Cleaning & Exam"
+    description: "Standard cleaning, exam, and X-rays if due."
+    category: "Preventive"
+    tags: ["cleaning", "checkup"]
+    price: 150
+    active: true
+  - id: "svc-whitening"
+    name: "Professional Whitening"
+    description: "In-office whitening treatment."
+    category: "Cosmetic"
+    tags: ["cosmetic"]
+    price: 400
+    active: true
+  - id: "svc-filling"
+    name: "Composite Filling"
+    description: "Tooth-colored filling, price varies by tooth and surfaces."
+    category: "Restorative"
+    tags: ["filling"]
+    price: "varies"
+    active: true
+
+faqs:
+  - question: "Do you see new patients?"
+    answer: "Yes, we're accepting new patients of all ages; call or use the online booking link to schedule a first visit."
+    tags: ["new-patient"]
+  - question: "What should I bring to my first appointment?"
+    answer: "Please bring a photo ID and your insurance card if you have one; arrive 15 minutes early to fill out paperwork."
+    tags: ["first-visit"]
+  - question: "Do you handle dental emergencies?"
+    answer: "Yes, call the office line — we hold same-day slots for urgent issues like pain or a broken tooth."
+    tags: ["emergency"]
+
+staff:
+  - name: "Dr. Amir Kessler, DDS"
+    role: "General Dentist"
+    bio: "Practicing family dentistry in Westchester County for 15 years."
+    credentials: ["DDS"]
+  - name: "Dr. Priya Nair, DDS"
+    role: "General Dentist"
+    credentials: ["DDS"]
+
+booking:
+  methods: ["phone", "online"]
+  url: "https://brightsidedental.example/book"
+  phone: "555-330-7200"
+
+inquiries:
+  mode: file
+  file_path: "./inquiries.jsonl"
+  rate_limit_per_minute: 5
+
+policies:
+  cancellation: "24-hour notice required to cancel or reschedule without a fee."
+  new_patient_forms: "New patient forms can be completed online before your visit."
+
+capabilities:
+  insurance_accepted:
+    accepted_insurers:
+      - "Delta Dental"
+      - "Cigna Dental"
+      - "MetLife"
+      - "Guardian"
+    notes: "We are out-of-network for some plans but can still file claims on your behalf — call to confirm your specific plan."
+  price_estimate:
+    disclaimer: "This is a rough estimate only, not a quote. Final cost depends on your in-person exam and your insurance coverage."
+    variance_pct: 0.25

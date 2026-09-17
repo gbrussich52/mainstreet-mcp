@@ -1,0 +1,95 @@
+business:
+  name: "Willow & Stone Spa"
+  industry: salon-spa
+  description: "Hair, skincare, and massage studio."
+  phone: "555-770-2200"
+  email: "book@willowandstone.example"
+  website: "https://willowandstone.example"
+  address:
+    street: "56 Maple Court"
+    city: "Rye"
+    state: "NY"
+    zip: "10580"
+
+hours:
+  timezone: "America/New_York"
+  schedule:
+    mon: []
+    tue: [{ open: "10:00", close: "19:00" }]
+    wed: [{ open: "10:00", close: "19:00" }]
+    thu: [{ open: "10:00", close: "20:00" }]
+    fri: [{ open: "09:00", close: "19:00" }]
+    sat: [{ open: "09:00", close: "17:00" }]
+    sun: [{ open: "10:00", close: "15:00" }]
+  exceptions: []
+
+offerings:
+  - id: "svc-haircut"
+    name: "Women's Haircut & Style"
+    tags: ["hair"]
+    price: 85
+    active: true
+  - id: "svc-facial"
+    name: "Signature Facial"
+    description: "60-minute customized facial."
+    tags: ["skincare", "facial"]
+    price: 120
+    active: true
+  - id: "svc-massage"
+    name: "Deep Tissue Massage"
+    description: "60-minute deep tissue massage."
+    tags: ["massage"]
+    price: 130
+    active: true
+
+faqs:
+  - question: "Do I need to book in advance?"
+    answer: "We recommend booking at least a few days ahead, especially for weekend appointments."
+    tags: ["booking"]
+  - question: "What's your cancellation policy?"
+    answer: "We ask for 24 hours' notice; late cancellations may incur a 50% fee."
+    tags: ["cancellation"]
+
+staff:
+  - name: "Jenna Marsh"
+    role: "Master Stylist"
+    credentials: []
+  - name: "Lucia Ferreira"
+    role: "Licensed Massage Therapist"
+    credentials: ["LMT"]
+
+booking:
+  methods: ["online", "phone"]
+  url: "https://willowandstone.example/book"
+  phone: "555-770-2200"
+
+inquiries:
+  mode: file
+  file_path: "./inquiries.jsonl"
+  rate_limit_per_minute: 5
+
+policies:
+  cancellation: "24-hour notice required; late cancellations may incur a 50% fee."
+
+capabilities:
+  price_estimate:
+    disclaimer: "This is a rough estimate only, not a quote. Final pricing depends on hair length/condition or session add-ons at booking."
+    variance_pct: 0.15
+  class_schedule:
+    classes:
+      - id: "yoga-am"
+        name: "Morning Restorative Yoga"
+        day: tue
+        start_time: "08:00"
+        end_time: "09:00"
+        instructor: "Jenna Marsh"
+        capacity: 10
+        location: "Studio A"
+      - id: "yoga-eve"
+        name: "Evening Flow Yoga"
+        day: thu
+        start_time: "18:00"
+        end_time: "19:00"
+        instructor: "Lucia Ferreira"
+        capacity: 10
+        location: "Studio A"

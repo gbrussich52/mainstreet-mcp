@@ -1,0 +1,81 @@
+business:
+  name: "Riverbend Realty Group"
+  industry: real-estate-agent
+  description: "Independent residential real estate agent serving lower Westchester County."
+  phone: "555-905-6600"
+  email: "sam@riverbendrealty.example"
+  website: "https://riverbendrealty.example"
+  address:
+    street: "12 River Street"
+    city: "Hastings-on-Hudson"
+    state: "NY"
+    zip: "10706"
+
+hours:
+  timezone: "America/New_York"
+  schedule:
+    mon: [{ open: "09:00", close: "18:00" }]
+    tue: [{ open: "09:00", close: "18:00" }]
+    wed: [{ open: "09:00", close: "18:00" }]
+    thu: [{ open: "09:00", close: "18:00" }]
+    fri: [{ open: "09:00", close: "18:00" }]
+    sat: [{ open: "10:00", close: "16:00" }]
+    sun: [{ open: "10:00", close: "16:00" }]
+  exceptions: []
+
+offerings:
+  - id: "listing-101"
+    name: "3BR Colonial on Elm"
+    description: "Updated kitchen, fenced yard, walk to train station."
+    price: 725000
+    beds: 3
+    baths: 2
+    sqft: 1850
+    status: "active"
+    tags: ["colonial", "walk-to-train"]
+    active: true
+  - id: "listing-102"
+    name: "2BR Condo, River View"
+    description: "Top-floor unit with river views, in-unit laundry."
+    price: 480000
+    beds: 2
+    baths: 2
+    sqft: 1100
+    status: "pending"
+    tags: ["condo", "river-view"]
+    active: true
+
+faqs:
+  - question: "Do you work with buyers or only sellers?"
+    answer: "Both — I represent buyers and sellers across lower Westchester."
+    tags: ["services"]
+  - question: "Do you offer a free home valuation?"
+    answer: "Yes, contact me for a free, no-obligation comparative market analysis of your home."
+    tags: ["valuation", "sellers"]
+
+staff:
+  - name: "Sam Delgado"
+    role: "Licensed Real Estate Salesperson"
+    credentials: ["NY Real Estate License"]
+
+booking:
+  methods: ["phone", "email"]
+  phone: "555-905-6600"
+  notes: "Showings by appointment; call or email to schedule."
+
+inquiries:
+  mode: file
+  file_path: "./inquiries.jsonl"
+  rate_limit_per_minute: 5
+
+policies:
+  mls_disclaimer: "Listing data is deemed reliable but not guaranteed; verify current status with the agent."
+
+capabilities:
+  listings:
+    mls_disclaimer: "Listing data may not reflect the current status; confirm with an agent before making decisions."
+  service_area:
+    cities: ["Hastings-on-Hudson", "Dobbs Ferry", "Irvington", "Tarrytown"]
+    zip_codes: ["10706", "10522", "10533", "10591"]
+    base_location: "Hastings-on-Hudson, NY"
+    notes: "I primarily work lower Westchester river towns; I can refer buyers/sellers elsewhere on request."

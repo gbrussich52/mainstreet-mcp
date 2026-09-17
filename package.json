@@ -1,0 +1,35 @@
+{
+  "name": "mainstreet-mcp",
+  "version": "0.1.0",
+  "description": "Main Street MCP — free industry starter kit MCP server for small businesses",
+  "type": "module",
+  "bin": {
+    "mainstreet-mcp": "./dist/cli.js"
+  },
+  "main": "./dist/server.js",
+  "types": "./dist/server.d.ts",
+  "files": [
+    "dist",
+    "examples"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test dist/test/**/*.test.js",
+    "dev": "tsc -p tsconfig.json --watch"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/node": "2.0.0",
+    "@modelcontextprotocol/server": "2.0.0",
+    "yaml": "2.9.1",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.0.0",
+    "@types/node": "22.20.3",
+    "typescript": "7.0.2"
+  },
+  "license": "MIT"
+}

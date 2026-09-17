@@ -1,0 +1,5 @@
+node_modules/
+dist/
+inquiries*.jsonl
+*.log
+.DS_Store

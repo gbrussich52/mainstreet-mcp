@@ -1,0 +1,83 @@
+business:
+  name: "Ironclad Fitness Studio"
+  industry: fitness-studio
+  description: "Small-group strength training and conditioning classes."
+  phone: "555-880-3300"
+  email: "hello@ironcladfitness.example"
+  website: "https://ironcladfitness.example"
+  address:
+    street: "77 Depot Plaza"
+    city: "Mamaroneck"
+    state: "NY"
+    zip: "10543"
+
+hours:
+  timezone: "America/New_York"
+  schedule:
+    mon: [{ open: "06:00", close: "20:00" }]
+    tue: [{ open: "06:00", close: "20:00" }]
+    wed: [{ open: "06:00", close: "20:00" }]
+    thu: [{ open: "06:00", close: "20:00" }]
+    fri: [{ open: "06:00", close: "18:00" }]
+    sat: [{ open: "08:00", close: "12:00" }]
+    sun: []
+  exceptions: []
+
+offerings:
+  - id: "membership-unlimited"
+    name: "Unlimited Monthly Membership"
+    tags: ["membership"]
+    price: 175
+    unit: "per month"
+    active: true
+  - id: "membership-4x"
+    name: "4x/Month Membership"
+    tags: ["membership"]
+    price: 99
+    unit: "per month"
+    active: true
+
+faqs:
+  - question: "Do you offer a trial class?"
+    answer: "Yes, your first class is free — book through the online schedule and mention it's your first visit."
+    tags: ["trial", "new-member"]
+  - question: "What should I bring?"
+    answer: "Water, a towel, and sneakers; we provide all other equipment."
+    tags: ["what-to-bring"]
+
+staff:
+  - name: "Coach Devon Marsh"
+    role: "Head Coach"
+    credentials: ["NASM-CPT"]
+
+booking:
+  methods: ["online"]
+  url: "https://ironcladfitness.example/schedule"
+
+inquiries:
+  mode: file
+  file_path: "./inquiries.jsonl"
+  rate_limit_per_minute: 5
+
+policies:
+  membership_freeze: "Memberships can be frozen for up to 2 months per year with advance notice."
+
+capabilities:
+  class_schedule:
+    classes:
+      - id: "strength-am"
+        name: "Morning Strength"
+        day: mon
+        start_time: "06:00"
+        end_time: "07:00"
+        instructor: "Coach Devon Marsh"
+        capacity: 12
+        location: "Main Floor"
+      - id: "conditioning-eve"
+        name: "Evening Conditioning"
+        day: wed
+        start_time: "18:00"
+        end_time: "19:00"
+        instructor: "Coach Devon Marsh"
+        capacity: 12
+        location: "Main Floor"

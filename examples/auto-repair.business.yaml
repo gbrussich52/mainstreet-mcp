@@ -1,0 +1,86 @@
+business:
+  name: "Crossroads Auto Repair"
+  industry: auto-repair
+  description: "Independent full-service auto repair shop, all makes and models."
+  phone: "555-244-8800"
+  email: "service@crossroadsauto.example"
+  website: "https://crossroadsauto.example"
+  address:
+    street: "301 Route 9"
+    city: "Ossining"
+    state: "NY"
+    zip: "10562"
+
+hours:
+  timezone: "America/New_York"
+  schedule:
+    mon: [{ open: "07:30", close: "18:00" }]
+    tue: [{ open: "07:30", close: "18:00" }]
+    wed: [{ open: "07:30", close: "18:00" }]
+    thu: [{ open: "07:30", close: "18:00" }]
+    fri: [{ open: "07:30", close: "18:00" }]
+    sat: [{ open: "08:00", close: "14:00" }]
+    sun: []
+  exceptions: []
+
+offerings:
+  - id: "svc-oilchange"
+    name: "Oil Change"
+    description: "Conventional or synthetic, includes multi-point inspection."
+    tags: ["maintenance", "oil-change"]
+    price: 65
+    active: true
+  - id: "svc-brakes"
+    name: "Brake Pad Replacement (Front)"
+    description: "Pads, labor, and inspection; rotors extra if needed."
+    tags: ["brakes"]
+    price: 240
+    active: true
+  - id: "svc-inspection"
+    name: "NY State Inspection"
+    tags: ["inspection"]
+    price: 37
+    active: true
+
+faqs:
+  - question: "Do you offer loaner cars?"
+    answer: "We don't offer loaners, but we're a short walk from the train station and downtown shops while you wait."
+    tags: ["waiting"]
+  - question: "Do you work on foreign cars?"
+    answer: "Yes, we service all makes and models, domestic and foreign."
+    tags: ["makes"]
+
+staff:
+  - name: "Hector Vasquez"
+    role: "Owner / ASE Master Technician"
+    credentials: ["ASE Master Technician"]
+
+booking:
+  methods: ["phone", "online"]
+  url: "https://crossroadsauto.example/schedule"
+  phone: "555-244-8800"
+
+inquiries:
+  mode: file
+  file_path: "./inquiries.jsonl"
+  rate_limit_per_minute: 5
+
+policies:
+  estimates: "Written estimates provided before any repair over $150."
+
+capabilities:
+  service_area:
+    zip_codes: ["10562", "10510", "10520", "10547"]
+    cities: ["Ossining", "Briarcliff Manor", "Croton-on-Hudson"]
+    radius_miles: 10
+    base_location: "Ossining, NY"
+  price_estimate:
+    disclaimer: "This is a rough estimate only, not a quote. Final pricing depends on an in-person diagnosis."
+    variance_pct: 0.2
+  insurance_accepted:
+    accepted_insurers:
+      - "Geico"
+      - "Progressive"
+      - "State Farm"
+      - "Allstate"
+    notes: "We work directly with most major insurers for collision claims."

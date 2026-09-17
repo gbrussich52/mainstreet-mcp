@@ -1,0 +1,76 @@
+business:
+  name: "Hartwell & Cho LLP"
+  industry: law-firm
+  description: "Small firm handling estate planning, real estate closings, and small business formation."
+  phone: "555-410-9800"
+  email: "intake@hartwellcho.example"
+  website: "https://hartwellcho.example"
+  address:
+    street: "9 Court Street, Suite 3"
+    city: "White Plains"
+    state: "NY"
+    zip: "10601"
+
+hours:
+  timezone: "America/New_York"
+  schedule:
+    mon: [{ open: "09:00", close: "17:30" }]
+    tue: [{ open: "09:00", close: "17:30" }]
+    wed: [{ open: "09:00", close: "17:30" }]
+    thu: [{ open: "09:00", close: "17:30" }]
+    fri: [{ open: "09:00", close: "16:00" }]
+    sat: []
+    sun: []
+  exceptions: []
+
+offerings:
+  - id: "pa-estate"
+    name: "Estate Planning"
+    description: "Wills, trusts, and powers of attorney."
+    tags: ["wills", "trusts", "estate"]
+    active: true
+  - id: "pa-realestate"
+    name: "Real Estate Closings"
+    description: "Residential purchase and sale closings."
+    tags: ["real-estate", "closing"]
+    active: true
+  - id: "pa-business"
+    name: "Small Business Formation"
+    description: "LLC and corporation formation, operating agreements."
+    tags: ["business", "llc"]
+    active: true
+
+faqs:
+  - question: "Do you offer free consultations?"
+    answer: "We offer a complimentary 15-minute phone consultation to discuss whether we're a fit for your matter."
+    tags: ["consultation", "fees"]
+  - question: "What areas of law do you not handle?"
+    answer: "We do not take criminal, family/divorce, or personal injury matters, and can provide referrals for those."
+    tags: ["scope"]
+
+staff:
+  - name: "Diane Hartwell, Esq."
+    role: "Partner"
+    bio: "Focuses on estate planning and elder law."
+    credentials: ["JD", "NY Bar"]
+  - name: "Marcus Cho, Esq."
+    role: "Partner"
+    bio: "Focuses on real estate and business transactions."
+    credentials: ["JD", "NY Bar"]
+
+booking:
+  methods: ["phone", "email"]
+  phone: "555-410-9800"
+  notes: "New-matter intake is by phone or email; we do not book consultations online."
+
+inquiries:
+  mode: file
+  file_path: "./inquiries.jsonl"
+  rate_limit_per_minute: 5
+
+policies:
+  fees: "Initial consultations are free; engagement and fee structure are discussed before any representation begins."
+
+capabilities:
+  practice_areas:
+    disclaimer: "This is general information about our practice areas, not legal advice. Consult an attorney about your specific situation."

@@ -1,0 +1,94 @@
+business:
+  name: "Maple & Vine Kitchen"
+  industry: restaurant
+  description: "Farm-to-table American cooking in a casual dining room."
+  phone: "555-201-4400"
+  email: "hello@mapleandvine.example"
+  website: "https://mapleandvine.example"
+  address:
+    street: "118 Elm Street"
+    city: "Ossining"
+    state: "NY"
+    zip: "10562"
+
+hours:
+  timezone: "America/New_York"
+  schedule:
+    mon: []
+    tue: [{ open: "11:30", close: "21:00" }]
+    wed: [{ open: "11:30", close: "21:00" }]
+    thu: [{ open: "11:30", close: "21:00" }]
+    fri: [{ open: "11:30", close: "22:00" }]
+    sat: [{ open: "10:00", close: "22:00" }]
+    sun: [{ open: "10:00", close: "20:00" }]
+  exceptions:
+    - date: "2026-12-25"
+      closed: true
+      note: "Closed for Christmas"
+
+offerings:
+  - id: "app-01"
+    name: "Roasted Beet Salad"
+    description: "Local beets, goat cheese, candied walnuts, arugula."
+    category: "Starters"
+    tags: ["vegetarian", "gluten-free"]
+    price: 12
+    active: true
+  - id: "main-01"
+    name: "Herb-Roasted Chicken"
+    description: "Half chicken, seasonal vegetables, pan jus."
+    category: "Entrees"
+    tags: ["gluten-free"]
+    price: 24
+    active: true
+  - id: "main-02"
+    name: "Wild Mushroom Risotto"
+    description: "Arborio rice, wild mushrooms, parmesan, truffle oil."
+    category: "Entrees"
+    tags: ["vegetarian"]
+    price: 21
+    active: true
+  - id: "dessert-01"
+    name: "Flourless Chocolate Torte"
+    description: "Served with raspberry coulis."
+    category: "Desserts"
+    tags: ["gluten-free"]
+    price: 9
+    active: true
+
+faqs:
+  - question: "Do you take walk-ins?"
+    answer: "Yes, we hold about a third of our tables for walk-ins every night, but reservations are recommended on weekends."
+    tags: ["reservations", "walk-in"]
+  - question: "Is there parking?"
+    answer: "Free lot parking is available behind the building, entrance on Depew Street."
+    tags: ["parking"]
+  - question: "Do you have gluten-free options?"
+    answer: "Yes — several dishes are marked gluten-free on the menu, and our kitchen can adapt most others on request."
+    tags: ["dietary", "gluten-free", "allergen"]
+
+staff:
+  - name: "Renata Alvarez"
+    role: "Executive Chef"
+    bio: "12 years in farm-to-table kitchens across the Hudson Valley."
+    credentials: []
+
+booking:
+  methods: ["phone", "online"]
+  url: "https://mapleandvine.example/reservations"
+  phone: "555-201-4400"
+  notes: "Parties of 6+ please call directly."
+
+inquiries:
+  mode: file
+  file_path: "./inquiries.jsonl"
+  rate_limit_per_minute: 5
+
+policies:
+  cancellation: "Please cancel reservations at least 2 hours in advance."
+  private_events: "We host private events for parties of 20+; contact us for details."
+
+capabilities:
+  menu:
+    currency: "USD"
+    show_prices: true

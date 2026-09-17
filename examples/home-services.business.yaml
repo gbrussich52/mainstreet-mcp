@@ -1,0 +1,80 @@
+business:
+  name: "Northgate Plumbing & Heating"
+  industry: home-services
+  description: "Residential plumbing, heating, and drain service."
+  phone: "555-622-1010"
+  email: "dispatch@northgateplumbing.example"
+  website: "https://northgateplumbing.example"
+  address:
+    street: "220 Industrial Way"
+    city: "Yonkers"
+    state: "NY"
+    zip: "10701"
+
+hours:
+  timezone: "America/New_York"
+  schedule:
+    mon: [{ open: "07:00", close: "18:00" }]
+    tue: [{ open: "07:00", close: "18:00" }]
+    wed: [{ open: "07:00", close: "18:00" }]
+    thu: [{ open: "07:00", close: "18:00" }]
+    fri: [{ open: "07:00", close: "18:00" }]
+    sat: [{ open: "08:00", close: "13:00" }]
+    sun: []
+  exceptions: []
+
+offerings:
+  - id: "svc-drain"
+    name: "Drain Cleaning"
+    description: "Snake and camera inspection for clogged drains."
+    tags: ["drain", "clog"]
+    price: 175
+    active: true
+  - id: "svc-waterheater"
+    name: "Water Heater Replacement"
+    description: "Standard 40-50 gallon tank replacement, labor and haul-away included."
+    tags: ["water-heater"]
+    price: 1800
+    active: true
+  - id: "svc-boiler-tune"
+    name: "Boiler Tune-Up"
+    description: "Seasonal inspection and tune-up for gas boilers."
+    tags: ["heating", "boiler"]
+    price: 220
+    active: true
+
+faqs:
+  - question: "Do you offer emergency service?"
+    answer: "Yes, we run an after-hours emergency line for burst pipes and no-heat calls; standard emergency rates apply outside business hours."
+    tags: ["emergency"]
+  - question: "Are you licensed and insured?"
+    answer: "Yes, we are fully licensed and insured in New York State; license number is available on request."
+    tags: ["licensing"]
+
+staff:
+  - name: "Tom Reyes"
+    role: "Owner / Master Plumber"
+    credentials: ["Master Plumber License"]
+
+booking:
+  methods: ["phone", "online"]
+  url: "https://northgateplumbing.example/schedule"
+  phone: "555-622-1010"
+
+inquiries:
+  mode: file
+  file_path: "./inquiries.jsonl"
+  rate_limit_per_minute: 5
+
+policies:
+  service_call_fee: "A $75 service call fee applies, waived if you proceed with the recommended repair."
+
+capabilities:
+  service_area:
+    zip_codes: ["10701", "10703", "10704", "10705", "10710"]
+    cities: ["Yonkers", "Bronxville", "Tuckahoe"]
+    radius_miles: 15
+    base_location: "Yonkers, NY"
+  price_estimate:
+    disclaimer: "This is a rough estimate only, not a quote. Final pricing depends on an in-person assessment."
+    variance_pct: 0.25

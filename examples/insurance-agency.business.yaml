@@ -1,0 +1,78 @@
+business:
+  name: "Hudson Valley Insurance Agency"
+  industry: insurance-agency
+  description: "Independent insurance agency writing personal and small commercial lines."
+  phone: "555-500-2900"
+  email: "info@hviagency.example"
+  website: "https://hviagency.example"
+  address:
+    street: "60 Main Street"
+    city: "Tarrytown"
+    state: "NY"
+    zip: "10591"
+
+hours:
+  timezone: "America/New_York"
+  schedule:
+    mon: [{ open: "09:00", close: "17:00" }]
+    tue: [{ open: "09:00", close: "17:00" }]
+    wed: [{ open: "09:00", close: "17:00" }]
+    thu: [{ open: "09:00", close: "17:00" }]
+    fri: [{ open: "09:00", close: "17:00" }]
+    sat: []
+    sun: []
+  exceptions: []
+
+offerings:
+  - id: "line-auto"
+    name: "Auto Insurance"
+    description: "Personal auto coverage, multi-car and multi-policy discounts available."
+    tags: ["auto"]
+    active: true
+  - id: "line-home"
+    name: "Homeowners Insurance"
+    description: "Coverage for owner-occupied homes and condos."
+    tags: ["home"]
+    active: true
+  - id: "line-business"
+    name: "Small Business Insurance"
+    description: "General liability and BOP policies for small businesses."
+    tags: ["commercial"]
+    active: true
+
+faqs:
+  - question: "Do you offer bundling discounts?"
+    answer: "Yes, bundling auto and home policies typically saves 10-20% depending on the carrier."
+    tags: ["discounts", "bundling"]
+  - question: "Can I get a quote online?"
+    answer: "Call or email us with some basic details and we'll get a quote back to you, usually within one business day."
+    tags: ["quotes"]
+
+staff:
+  - name: "Karen Whitfield"
+    role: "Owner / Licensed Agent"
+    credentials: ["NY Insurance License"]
+
+booking:
+  methods: ["phone", "email"]
+  phone: "555-500-2900"
+
+inquiries:
+  mode: file
+  file_path: "./inquiries.jsonl"
+  rate_limit_per_minute: 5
+
+policies:
+  quotes: "Quotes are non-binding estimates; final premiums are set by the underwriting carrier."
+
+capabilities:
+  coverage_lines:
+    carrier_names:
+      - "Travelers"
+      - "Progressive"
+      - "Safeco"
+      - "The Hartford"
+  service_area:
+    cities: ["Tarrytown", "Sleepy Hollow", "Irvington"]
+    zip_codes: ["10591", "10591-1234", "10533"]
+    notes: "Licensed to write policies throughout New York State."
