@@ -142,3 +142,25 @@ test('e2e: dental — submit_inquiry refuses health details over stdio', async (
     await client.close();
   }
 });
+
+// Regression (live Haiku test 2026-09-17): "front brake pads" found no priced offering.
+test('e2e: auto-repair — get_price_estimate matches loose wording', async () => {
+  const transport = new StdioClientTransport({
+    command: process.execPath,
+    args: [cliPath, '--config', join(examplesDir, 'auto-repair.business.yaml')],
+  });
+  const client = new Client({ name: 'mainstreet-e2e-estimate', version: '0.0.0' });
+  try {
+    await client.connect(transport);
+    for (const query of ['front brake pads', 'brakes', 'oil change']) {
+      const result = await client.callTool({ name: 'get_price_estimate', arguments: { query } });
+      const out = result.structuredContent as { low: number | null; matched_offering_id: string | null };
+      assert.ok(out.matched_offering_id, `${query}: no offering matched`);
+      assert.ok(typeof out.low === 'number', `${query}: no price range`);
+    }
+    const none = await client.callTool({ name: 'get_price_estimate', arguments: { query: 'sushi platter' } });
+    assert.equal((none.structuredContent as { low: number | null }).low, null, 'unrelated query must not invent a price');
+  } finally {
+    await client.close();
+  }
+});

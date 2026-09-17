@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import type { Capability } from './types.js';
+import { search } from '../search.js';
 
 const ConfigSchema = z.object({
   disclaimer: z
@@ -38,10 +39,17 @@ export const priceEstimateCapability: Capability<Config> = {
         annotations: { title: 'Get Price Estimate', readOnlyHint: true, idempotentHint: true, openWorldHint: false },
       },
       async ({ offering_id, query }) => {
-        let match = offering_id ? config.offerings.find((o) => o.id === offering_id) : undefined;
+        const active = config.offerings.filter((o) => o.active);
+        let match = offering_id ? active.find((o) => o.id === offering_id) : undefined;
         if (!match && query) {
-          const q = query.toLowerCase();
-          match = config.offerings.find((o) => o.name.toLowerCase().includes(q) || (o.description ?? '').toLowerCase().includes(q));
+          // Same token search as search_offerings — an exact-substring match missed
+          // "brake pads" vs "Brake Pad Replacement (Front)" in the live test (2026-09-17).
+          const hits = search(
+            active.map((o) => ({ offering: o, text: `${o.name} ${o.description ?? ''} ${o.tags.join(' ')} ${o.category ?? ''}` })),
+            query,
+            1,
+          ).filter((h) => h.score > 0);
+          match = hits[0]?.item.offering;
         }
         const base = match && typeof match.price === 'number' ? match.price : null;
         const variance = capabilityConfig.variance_pct;
