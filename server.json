@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.gbrussich52/mainstreet-mcp",
   "description": "Free small-business starter kit: hours, services, FAQs, booking and inquiries from one YAML file.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "websiteUrl": "https://github.com/gbrussich52/mainstreet-mcp#readme",
   "repository": {
     "url": "https://github.com/gbrussich52/mainstreet-mcp",
@@ -11,9 +11,9 @@
   "packages": [
     {
       "registryType": "mcpb",
-      "identifier": "https://github.com/gbrussich52/mainstreet-mcp/releases/download/v0.1.0/mainstreet-mcp.mcpb",
-      "version": "0.1.0",
-      "fileSha256": "9aeac7706a436d09f4ad936b9bb712bd0b8677b7639ebc87b02ea7b69ef54748",
+      "identifier": "https://github.com/gbrussich52/mainstreet-mcp/releases/download/v0.1.1/mainstreet-mcp.mcpb",
+      "version": "0.1.1",
+      "fileSha256": "0507bd81977d9e126c06ee0e0b80c6cbc87773ef35d410c77c27f5e7ca36ef97",
       "transport": {
         "type": "stdio"
       }
