@@ -18,7 +18,7 @@ customer questions about the business instead of guessing.
 2. **Generate the starter template** for that industry:
 
    ```
-   npx mainstreet-mcp init --industry <industry>
+   npx -y github:gbrussich52/mainstreet-mcp init --industry <industry>
    ```
 
    This writes `<industry>.business.yaml` in the current directory. Rename or copy it to
@@ -50,7 +50,7 @@ customer questions about the business instead of guessing.
 5. **Validate**:
 
    ```
-   npx mainstreet-mcp validate --config business.yaml
+   npx -y github:gbrussich52/mainstreet-mcp validate --config business.yaml
    ```
 
    If it fails, read the specific field-level error back to the owner in plain language,
