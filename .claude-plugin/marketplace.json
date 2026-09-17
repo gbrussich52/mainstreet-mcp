@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "mainstreet",
-  "description": "Main Street MCP — free industry starter kits that let a small business answer questions about itself from one business.yaml file.",
+  "description": "Main Street MCP \u2014 free industry starter kits that let a small business answer questions about itself from one business.yaml file.",
   "owner": {
     "name": "Giani Brussich",
     "url": "https://github.com/gbrussich52"
@@ -23,11 +23,12 @@
         "restaurant",
         "dental",
         "law-firm",
-        "salon",
-        "fitness",
-        "real-estate",
+        "home-services",
+        "salon-spa",
+        "fitness-studio",
+        "real-estate-agent",
         "auto-repair",
-        "insurance",
+        "insurance-agency",
         "church"
       ]
     }

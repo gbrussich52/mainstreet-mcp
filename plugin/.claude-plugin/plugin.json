@@ -13,11 +13,12 @@
     "restaurant",
     "dental",
     "law-firm",
-    "salon",
-    "fitness",
-    "real-estate",
+    "home-services",
+    "salon-spa",
+    "fitness-studio",
+    "real-estate-agent",
     "auto-repair",
-    "insurance",
+    "insurance-agency",
     "church"
   ]
 }
