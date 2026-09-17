@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.gbrussich52/mainstreet-mcp",
-  "description": "Free industry starter kit MCP server for small businesses — gives an AI assistant reliable answers about hours, menu/services, FAQs, staff, and booking from one business.yaml file.",
+  "description": "Free small-business starter kit: hours, services, FAQs, booking and inquiries from one YAML file.",
   "version": "0.1.0",
   "websiteUrl": "https://github.com/gbrussich52/mainstreet-mcp#readme",
   "repository": {
