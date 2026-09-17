@@ -10,22 +10,13 @@
   },
   "packages": [
     {
-      "registryType": "npm",
-      "registryBaseUrl": "https://registry.npmjs.org",
-      "identifier": "mainstreet-mcp",
+      "registryType": "mcpb",
+      "identifier": "https://github.com/gbrussich52/mainstreet-mcp/releases/download/v0.1.0/mainstreet-mcp.mcpb",
       "version": "0.1.0",
+      "fileSha256": "9aeac7706a436d09f4ad936b9bb712bd0b8677b7639ebc87b02ea7b69ef54748",
       "transport": {
         "type": "stdio"
-      },
-      "packageArguments": [
-        {
-          "type": "named",
-          "name": "--config",
-          "description": "Absolute path to this business's business.yaml config file",
-          "format": "filepath",
-          "isRequired": true
-        }
-      ]
+      }
     }
   ]
 }
