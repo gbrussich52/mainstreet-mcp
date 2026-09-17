@@ -21,8 +21,8 @@ customer questions about the business instead of guessing.
    npx -y github:gbrussich52/mainstreet-mcp init --industry <industry>
    ```
 
-   This writes `<industry>.business.yaml` in the current directory. Rename or copy it to
-   `business.yaml` at the project root (the path the plugin's MCP config points at).
+   Run this from the project root. It writes `business.yaml` there — the exact path the
+   plugin's MCP config points at, so nothing needs renaming.
 
 3. **Interview the owner** for each section, in plain language — don't show them YAML,
    just ask the questions and fill the file yourself:

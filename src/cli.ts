@@ -56,7 +56,10 @@ async function runInit(flags: ParsedArgs['flags']): Promise<void> {
     process.exitCode = 1;
     return;
   }
-  const out = typeof flags.out === 'string' ? flags.out : `${industry}.business.yaml`;
+  // Default to the same filename `serve` and `validate` look for, so `init` then
+  // `serve` works with no flags — including from the plugin, whose .mcp.json
+  // passes ${CLAUDE_PROJECT_DIR}/business.yaml.
+  const out = typeof flags.out === 'string' ? flags.out : 'business.yaml';
   const examplesDir = fileURLToPath(new URL('../examples/', import.meta.url));
   const source = `${examplesDir}${industry}.business.yaml`;
   if (!existsSync(source)) {
@@ -70,7 +73,7 @@ async function runInit(flags: ParsedArgs['flags']): Promise<void> {
     return;
   }
   copyFileSync(source, out);
-  console.log(`Wrote ${out} from the "${industry}" template. Edit it, then run: mainstreet-mcp validate --config ${out}`);
+  console.log(`Wrote ${out} from the "${industry}" template. Edit it, then run: mainstreet-mcp validate${out === 'business.yaml' ? '' : ` --config ${out}`}`);
 }
 
 function runValidate(flags: ParsedArgs['flags']): void {

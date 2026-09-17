@@ -164,3 +164,30 @@ test('e2e: auto-repair — get_price_estimate matches loose wording', async () =
     await client.close();
   }
 });
+
+// The plugin's .mcp.json points at ${CLAUDE_PROJECT_DIR}/business.yaml, and `serve`
+// and `validate` both default to ./business.yaml. `init` used to write
+// <industry>.business.yaml, so following the plugin's own instructions produced a
+// server that could not find its config. This pins the three to one filename.
+test('init writes business.yaml, and validate finds it with no flags', async () => {
+  const { mkdtempSync, existsSync, rmSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const { execFileSync } = await import('node:child_process');
+
+  const dir = mkdtempSync(join(tmpdir(), 'mainstreet-init-'));
+  try {
+    execFileSync(process.execPath, [cliPath, 'init', '--industry', 'salon-spa'], {
+      cwd: dir,
+      encoding: 'utf8',
+    });
+    assert.ok(existsSync(join(dir, 'business.yaml')), 'init should write ./business.yaml');
+
+    const out = execFileSync(process.execPath, [cliPath, 'validate'], {
+      cwd: dir,
+      encoding: 'utf8',
+    });
+    assert.match(out, /valid/i);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});

@@ -1,0 +1,79 @@
+business:
+  name: "St. Aidan's Community Church"
+  industry: church
+  description: "Welcoming non-denominational Christian congregation."
+  phone: "555-660-1500"
+  email: "office@staidanschurch.example"
+  website: "https://staidanschurch.example"
+  address:
+    street: "5 Chapel Lane"
+    city: "Dobbs Ferry"
+    state: "NY"
+    zip: "10522"
+
+hours:
+  timezone: "America/New_York"
+  schedule:
+    mon: [{ open: "09:00", close: "15:00" }]
+    tue: [{ open: "09:00", close: "15:00" }]
+    wed: [{ open: "09:00", close: "15:00" }]
+    thu: [{ open: "09:00", close: "15:00" }]
+    fri: [{ open: "09:00", close: "15:00" }]
+    sat: []
+    sun: [{ open: "08:30", close: "13:00" }]
+  exceptions:
+    - date: "2026-12-25"
+      ranges:
+        - { open: "09:00", close: "10:30" }
+      note: "Special Christmas morning service only; office closed."
+
+offerings: []
+
+faqs:
+  - question: "Is childcare available during services?"
+    answer: "Yes, nursery care is available for infants through age 4 during the 10:00am service."
+    tags: ["childcare", "kids"]
+  - question: "Do you livestream services?"
+    answer: "Yes, the 10:00am service is livestreamed on our website and YouTube channel."
+    tags: ["livestream"]
+
+staff:
+  - name: "Pastor James Oduya"
+    role: "Senior Pastor"
+    credentials: []
+  - name: "Rev. Ellen Cross"
+    role: "Associate Pastor"
+    credentials: []
+
+booking:
+  methods: ["phone", "email"]
+  phone: "555-660-1500"
+  notes: "For pastoral care or event bookings, contact the church office directly."
+
+inquiries:
+  mode: file
+  file_path: "./inquiries.jsonl"
+  rate_limit_per_minute: 5
+
+policies:
+  building_use: "The fellowship hall is available for community groups by reservation through the office."
+
+capabilities:
+  service_times:
+    services:
+      - id: "sunday-early"
+        name: "Early Service"
+        day: sun
+        start_time: "08:30"
+        location: "Main Sanctuary"
+      - id: "sunday-main"
+        name: "Main Service"
+        day: sun
+        start_time: "10:00"
+        location: "Main Sanctuary"
+        notes: "Nursery and children's church available."
+      - id: "wednesday-bible-study"
+        name: "Wednesday Bible Study"
+        day: wed
+        start_time: "19:00"
+        location: "Fellowship Hall"

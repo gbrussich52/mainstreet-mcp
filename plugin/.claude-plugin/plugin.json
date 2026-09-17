@@ -1,11 +1,23 @@
 {
   "name": "mainstreet",
-  "description": "Main Street MCP — free industry starter kit for small businesses. Gives your AI assistant reliable answers about your hours, menu/services, FAQs, staff, and booking from one business.yaml file, plus a setup skill that interviews you and writes it for you.",
-  "version": "0.1.0",
+  "description": "Main Street MCP \u2014 free industry starter kit for small businesses. Gives your AI assistant reliable answers about your hours, menu/services, FAQs, staff, and booking from one business.yaml file, plus a setup skill that interviews you and writes it for you.",
+  "version": "0.1.1",
   "author": {
     "name": "Giani Brussich"
   },
   "homepage": "https://github.com/gbrussich52/mainstreet-mcp#readme",
   "license": "MIT",
-  "keywords": ["mcp", "small-business", "restaurant", "dental", "law-firm", "salon", "fitness", "real-estate", "auto-repair", "insurance", "church"]
+  "keywords": [
+    "mcp",
+    "small-business",
+    "restaurant",
+    "dental",
+    "law-firm",
+    "salon",
+    "fitness",
+    "real-estate",
+    "auto-repair",
+    "insurance",
+    "church"
+  ]
 }

@@ -2,8 +2,8 @@
   "manifest_version": "0.3",
   "name": "mainstreet-mcp",
   "display_name": "Main Street MCP",
-  "version": "0.1.0",
-  "description": "Free industry starter kit MCP server for small businesses — reliable answers about your hours, menu/services, FAQs, staff, and booking, from one business.yaml file.",
+  "version": "0.1.1",
+  "description": "Free industry starter kit MCP server for small businesses \u2014 reliable answers about your hours, menu/services, FAQs, staff, and booking, from one business.yaml file.",
   "long_description": "Main Street MCP gives a small business's AI assistants (Claude and other MCP clients) reliable answers about the business itself instead of hallucinating them. Point it at your business.yaml (generated with `npx -y github:gbrussich52/mainstreet-mcp init --industry <yours>`) and it exposes 7 universal tools (profile, open/closed status, search, FAQs, staff, booking options, inquiries) plus industry-specific tools for restaurants, dental, law firms, home services, salons/spas, fitness studios, real estate agents, auto repair, insurance agencies, and churches.",
   "author": {
     "name": "Giani Brussich"

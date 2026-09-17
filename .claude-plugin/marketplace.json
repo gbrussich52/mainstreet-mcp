@@ -1,0 +1,35 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "mainstreet",
+  "description": "Main Street MCP — free industry starter kits that let a small business answer questions about itself from one business.yaml file.",
+  "owner": {
+    "name": "Giani Brussich",
+    "url": "https://github.com/gbrussich52"
+  },
+  "plugins": [
+    {
+      "name": "mainstreet",
+      "description": "Free small-business starter kit: hours, services, prices, FAQs, staff, booking and inquiries from one business.yaml, with ten industry presets and a setup skill that writes the file for you.",
+      "author": {
+        "name": "Giani Brussich"
+      },
+      "category": "productivity",
+      "source": "./plugin",
+      "homepage": "https://nyclaw.io/free-ai-starter-kit",
+      "license": "MIT",
+      "keywords": [
+        "mcp",
+        "small-business",
+        "restaurant",
+        "dental",
+        "law-firm",
+        "salon",
+        "fitness",
+        "real-estate",
+        "auto-repair",
+        "insurance",
+        "church"
+      ]
+    }
+  ]
+}
