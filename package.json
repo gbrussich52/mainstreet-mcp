@@ -10,7 +10,10 @@
   "types": "./dist/server.d.ts",
   "files": [
     "dist",
-    "examples"
+    "!dist/test",
+    "examples",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -31,5 +34,30 @@
     "@types/node": "22.20.3",
     "typescript": "7.0.2"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gbrussich52/mainstreet-mcp.git"
+  },
+  "homepage": "https://github.com/gbrussich52/mainstreet-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/gbrussich52/mainstreet-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "small-business",
+    "restaurant",
+    "dental",
+    "law-firm",
+    "salon",
+    "fitness",
+    "real-estate",
+    "auto-repair",
+    "insurance",
+    "church",
+    "ai-agent",
+    "claude"
+  ],
+  "mcpName": "io.github.gbrussich52/mainstreet-mcp"
 }

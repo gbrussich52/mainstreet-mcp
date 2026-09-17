@@ -102,6 +102,56 @@ sanitization (HTML/control-char stripping, length caps, rate limiting):
 `price_estimate` outputs always carry `is_estimate: true` plus a disclaimer — never present
 as a firm quote.
 
+## Install
+
+### Claude Desktop (one-click, no terminal)
+
+Download the latest `mainstreet-mcp.mcpb` from the [releases page](https://github.com/gbrussich52/mainstreet-mcp/releases)
+(or build it yourself — see `mcpb/` below), then double-click it. Claude Desktop opens it as
+a Desktop Extension install prompt; it asks for one thing — the path to your
+`business.yaml` — then installs. No Node.js install or terminal needed.
+
+To build the `.mcpb` yourself:
+
+```
+npx @anthropic-ai/mcpb pack mcpb build/mainstreet-mcp.mcpb
+```
+
+### Claude Code (plugin)
+
+Install the bundled plugin, which registers the MCP server and adds a `setup-my-business`
+skill that interviews you and writes `business.yaml` for you:
+
+```
+claude plugin install ./plugin
+```
+
+The plugin's MCP config expects `business.yaml` at your project root
+(`${CLAUDE_PROJECT_DIR}/business.yaml`) — run the `setup-my-business` skill, or `npx
+mainstreet-mcp init --industry <yours>` and copy the result to `business.yaml`, to create it.
+
+### Claude Code (direct MCP add, no plugin)
+
+```
+claude mcp add mainstreet -- npx -y mainstreet-mcp --config /absolute/path/to/business.yaml
+```
+
+### Generic JSON config (any MCP client)
+
+For any client that spawns stdio servers from a JSON config (Claude Desktop's manual config,
+other MCP clients):
+
+```json
+{
+  "mcpServers": {
+    "my-business": {
+      "command": "npx",
+      "args": ["mainstreet-mcp", "--config", "/absolute/path/to/business.yaml"]
+    }
+  }
+}
+```
+
 ## Example configs
 
 `examples/` has one working `<industry>.business.yaml` per supported industry — the same

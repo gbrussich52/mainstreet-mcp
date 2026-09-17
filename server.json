@@ -1,0 +1,31 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.gbrussich52/mainstreet-mcp",
+  "description": "Free industry starter kit MCP server for small businesses — gives an AI assistant reliable answers about hours, menu/services, FAQs, staff, and booking from one business.yaml file.",
+  "version": "0.1.0",
+  "websiteUrl": "https://github.com/gbrussich52/mainstreet-mcp#readme",
+  "repository": {
+    "url": "https://github.com/gbrussich52/mainstreet-mcp",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "mainstreet-mcp",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [
+        {
+          "type": "named",
+          "name": "--config",
+          "description": "Absolute path to this business's business.yaml config file",
+          "format": "filepath",
+          "isRequired": true
+        }
+      ]
+    }
+  ]
+}

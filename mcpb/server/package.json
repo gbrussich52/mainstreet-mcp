@@ -1,0 +1,11 @@
+{
+  "name": "mainstreet-mcp-bundle",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/node": "2.0.0",
+    "@modelcontextprotocol/server": "2.0.0",
+    "yaml": "2.9.1",
+    "zod": "4.6.5"
+  }
+}

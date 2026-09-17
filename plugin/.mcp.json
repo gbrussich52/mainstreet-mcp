@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "mainstreet": {
+      "command": "npx",
+      "args": ["-y", "mainstreet-mcp", "--config", "${CLAUDE_PROJECT_DIR}/business.yaml"]
+    }
+  }
+}
