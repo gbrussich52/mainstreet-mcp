@@ -11,7 +11,7 @@ business; no code changes required to run it.
 2. Generate a starter config for your industry:
 
    ```
-   npx -y github:gbrussich52/mainstreet-mcp init --industry restaurant
+   npx -y mainstreet-mcp init --industry restaurant
    ```
 
    Replace `restaurant` with your industry. Supported industries: `restaurant`, `dental`,
@@ -25,7 +25,7 @@ business; no code changes required to run it.
 3. Check your edits are valid:
 
    ```
-   npx -y github:gbrussich52/mainstreet-mcp validate
+   npx -y mainstreet-mcp validate
    ```
 
    A broken file (bad YAML, a typo'd industry, a field that doesn't fit) prints a specific,
@@ -39,7 +39,7 @@ business; no code changes required to run it.
      "mcpServers": {
        "my-business": {
          "command": "npx",
-         "args": ["-y", "github:gbrussich52/mainstreet-mcp", "--config", "/absolute/path/to/business.yaml"]
+         "args": ["-y", "mainstreet-mcp", "--config", "/absolute/path/to/business.yaml"]
        }
      }
    }
@@ -48,7 +48,7 @@ business; no code changes required to run it.
    To serve over HTTP instead (e.g. for a hosted deployment), run:
 
    ```
-   npx -y github:gbrussich52/mainstreet-mcp serve --http --port 3000
+   npx -y mainstreet-mcp serve --http --port 3000
    ```
 
    The HTTP server only binds to `127.0.0.1` and validates the `Host`/`Origin` headers on
@@ -129,13 +129,13 @@ claude plugin install ./plugin
 
 The plugin's MCP config expects `business.yaml` at your project root
 (`${CLAUDE_PROJECT_DIR}/business.yaml`), which is exactly what `init` writes — run the
-`setup-my-business` skill, or `npx -y github:gbrussich52/mainstreet-mcp init --industry <yours>`,
+`setup-my-business` skill, or `npx -y mainstreet-mcp init --industry <yours>`,
 from that directory.
 
 ### Claude Code (direct MCP add, no plugin)
 
 ```
-claude mcp add mainstreet -- npx -y github:gbrussich52/mainstreet-mcp --config /absolute/path/to/business.yaml
+claude mcp add mainstreet -- npx -y mainstreet-mcp --config /absolute/path/to/business.yaml
 ```
 
 ### Generic JSON config (any MCP client)
@@ -148,7 +148,7 @@ other MCP clients):
   "mcpServers": {
     "my-business": {
       "command": "npx",
-      "args": ["-y", "github:gbrussich52/mainstreet-mcp", "--config", "/absolute/path/to/business.yaml"]
+      "args": ["-y", "mainstreet-mcp", "--config", "/absolute/path/to/business.yaml"]
     }
   }
 }

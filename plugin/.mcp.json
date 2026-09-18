@@ -2,7 +2,7 @@
   "mcpServers": {
     "mainstreet": {
       "command": "npx",
-      "args": ["-y", "github:gbrussich52/mainstreet-mcp", "--config", "${CLAUDE_PROJECT_DIR}/business.yaml"]
+      "args": ["-y", "mainstreet-mcp", "--config", "${CLAUDE_PROJECT_DIR}/business.yaml"]
     }
   }
 }
