@@ -109,8 +109,15 @@ as a firm quote.
 
 Download the latest `mainstreet-mcp.mcpb` from the [releases page](https://github.com/gbrussich52/mainstreet-mcp/releases)
 (or build it yourself — see `mcpb/` below), then double-click it. Claude Desktop opens it as
-a Desktop Extension install prompt; it asks for one thing — the path to your
-`business.yaml` — then installs. No Node.js install or terminal needed.
+a Desktop Extension install prompt; it asks for one thing — a folder to keep your
+`business.yaml` in. Pick any folder you can find again; Documents is fine. No Node.js
+install or terminal needed.
+
+**You do not need a `business.yaml` before you install.** If the folder is empty, the server
+starts in setup mode: ask Claude to "set up my business", and it lists the industries, writes
+the starter file into that folder, and interviews you to fill in your real hours, services
+and prices. Turn the extension off and on again when you're done and your business tools
+appear. The folder you picked stays the same throughout.
 
 To build the `.mcpb` yourself:
 

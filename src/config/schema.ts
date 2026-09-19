@@ -15,6 +15,22 @@ export const INDUSTRIES = [
 ] as const;
 export type Industry = (typeof INDUSTRIES)[number];
 
+// How to say each industry id to a business owner, who should never have to
+// guess that a plumber picks "home-services". Lives here beside INDUSTRIES so
+// the ids and their plain-language labels stay one list, not two.
+export const INDUSTRY_LABELS: Record<Industry, string> = {
+  restaurant: 'Restaurant, cafe, bar, or food truck',
+  dental: 'Dental practice or orthodontist',
+  'law-firm': 'Law firm or solo attorney',
+  'home-services': 'Home services — plumbing, electrical, HVAC, roofing, landscaping',
+  'salon-spa': 'Hair salon, barber, nail salon, or day spa',
+  'fitness-studio': 'Gym, yoga or pilates studio, or personal training',
+  'real-estate-agent': 'Real-estate agent or brokerage',
+  'auto-repair': 'Auto repair shop, body shop, or tire shop',
+  'insurance-agency': 'Insurance agency',
+  church: 'Church, parish, or other place of worship',
+};
+
 const AddressSchema = z
   .object({
     street: z.string().optional(),

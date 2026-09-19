@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 import { existsSync, copyFileSync } from 'node:fs';
 import { createServer as createHttpServer } from 'node:http';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { serveStdio } from '@modelcontextprotocol/server/stdio';
-import { createMcpHandler } from '@modelcontextprotocol/server';
+import { createMcpHandler, type McpServer } from '@modelcontextprotocol/server';
 import { toNodeHandler, localhostHostValidation, localhostOriginValidation } from '@modelcontextprotocol/node';
 import { loadConfigFromFile, ConfigError } from './config/load.js';
 import { INDUSTRIES } from './config/schema.js';
 import { createServer } from './server.js';
+import { createSetupServer } from './setup-server.js';
 
 interface ParsedArgs {
   flags: Record<string, string | boolean>;
@@ -40,6 +42,8 @@ function printUsage(): void {
     [
       'Usage:',
       '  mainstreet-mcp [--config <path>]                serve over stdio (default)',
+      '  mainstreet-mcp serve [--config-dir <dir>]      serve business.yaml from a folder,',
+      '                                                 falling back to setup if it is absent',
       '  mainstreet-mcp serve --http [--port N] [--config <path>]',
       '  mainstreet-mcp validate [--config <path>]',
       '  mainstreet-mcp init --industry <industry> [--out <path>]',
@@ -91,13 +95,45 @@ function runValidate(flags: ParsedArgs['flags']): void {
   }
 }
 
-async function runServe(flags: ParsedArgs['flags']): Promise<void> {
+/**
+ * Resolves the server to serve, which is not always the business server.
+ *
+ * With `--config-dir` (what the desktop bundle passes) the owner has picked a
+ * folder, not a file, so business.yaml may not exist yet — on a fresh install
+ * it never does. Failing there would leave them with an extension that cannot
+ * start and no way to fix it from inside the app, so we serve the setup server
+ * instead and let it write the file into that same folder.
+ *
+ * With `--config` (the CLI and plugin path) a missing or invalid file is still
+ * a hard error: that caller named an exact file and expects it to load.
+ */
+function resolveServer(flags: ParsedArgs['flags']): () => McpServer {
+  const dir = typeof flags['config-dir'] === 'string' ? flags['config-dir'] : undefined;
+  if (dir !== undefined) {
+    const configPath = join(dir, 'business.yaml');
+    if (!existsSync(configPath)) {
+      return () => createSetupServer({ dir });
+    }
+    try {
+      const config = loadConfigFromFile(configPath);
+      return () => createServer(config);
+    } catch (err) {
+      const configError = err instanceof ConfigError ? err.message : (err as Error).message;
+      return () => createSetupServer({ dir, configError });
+    }
+  }
+
   const configPath = typeof flags.config === 'string' ? flags.config : './business.yaml';
   const config = loadConfigFromFile(configPath);
+  return () => createServer(config);
+}
+
+async function runServe(flags: ParsedArgs['flags']): Promise<void> {
+  const serverFactory = resolveServer(flags);
 
   if (flags.http) {
     const port = typeof flags.port === 'string' ? Number(flags.port) : 3000;
-    const mcpHandler = createMcpHandler(() => createServer(config));
+    const mcpHandler = createMcpHandler(serverFactory);
     const nodeHandler = toNodeHandler(mcpHandler);
     const validateHost = localhostHostValidation();
     const validateOrigin = localhostOriginValidation();
@@ -111,7 +147,7 @@ async function runServe(flags: ParsedArgs['flags']): Promise<void> {
     return;
   }
 
-  serveStdio(() => createServer(config));
+  serveStdio(serverFactory);
 }
 
 async function main(): Promise<void> {

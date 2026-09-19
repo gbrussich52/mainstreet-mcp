@@ -1,7 +1,7 @@
 {
   "name": "mainstreet-mcp",
-  "version": "0.1.1",
-  "description": "Main Street MCP \u2014 free industry starter kit MCP server for small businesses",
+  "version": "0.1.2",
+  "description": "Main Street MCP — free industry starter kit MCP server for small businesses",
   "type": "module",
   "bin": {
     "mainstreet-mcp": "./dist/cli.js"

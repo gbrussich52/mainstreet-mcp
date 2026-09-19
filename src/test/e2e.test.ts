@@ -191,3 +191,92 @@ test('init writes business.yaml, and validate finds it with no flags', async () 
     rmSync(dir, { recursive: true, force: true });
   }
 });
+
+// The desktop bundle (.mcpb) asks the owner for a FOLDER and passes it as
+// --config-dir, because a file picker cannot point at a business.yaml that does
+// not exist yet — which is every fresh install. The install dialog was a dead
+// end before this: no file meant no way to finish. These three pin the whole
+// path: empty folder serves setup, setup writes the file, the file then serves
+// the real business from the same folder the owner already picked.
+test('e2e: --config-dir with no business.yaml serves the setup server', async () => {
+  const { mkdtempSync, rmSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+
+  const dir = mkdtempSync(join(tmpdir(), 'mainstreet-setup-'));
+  const transport = new StdioClientTransport({
+    command: process.execPath,
+    args: [cliPath, 'serve', '--config-dir', dir],
+  });
+  const client = new Client({ name: 'mainstreet-e2e-setup', version: '0.0.0' });
+  try {
+    await client.connect(transport);
+    const names = (await client.listTools()).tools.map((t) => t.name).sort();
+    assert.deepEqual(names, ['create_business_config', 'list_industries']);
+
+    const listed = await client.callTool({ name: 'list_industries', arguments: {} });
+    const industries = (listed.structuredContent as { industries: { id: string; description: string }[] })
+      .industries;
+    assert.equal(industries.length, 10);
+    // A plumber must be able to find themselves without knowing the id.
+    const homeServices = industries.find((i) => i.id === 'home-services');
+    assert.match(homeServices?.description ?? '', /plumb/i);
+  } finally {
+    await client.close();
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('e2e: create_business_config writes into the folder and refuses to overwrite', async () => {
+  const { mkdtempSync, existsSync, rmSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+
+  const dir = mkdtempSync(join(tmpdir(), 'mainstreet-setup-write-'));
+  const transport = new StdioClientTransport({
+    command: process.execPath,
+    args: [cliPath, 'serve', '--config-dir', dir],
+  });
+  const client = new Client({ name: 'mainstreet-e2e-setup-write', version: '0.0.0' });
+  try {
+    await client.connect(transport);
+    const created = await client.callTool({
+      name: 'create_business_config',
+      arguments: { industry: 'dental' },
+    });
+    assert.equal((created.structuredContent as { path: string }).path, join(dir, 'business.yaml'));
+    assert.ok(existsSync(join(dir, 'business.yaml')), 'setup should write business.yaml into the folder');
+
+    const again = await client.callTool({
+      name: 'create_business_config',
+      arguments: { industry: 'restaurant' },
+    });
+    assert.equal(again.isError, true, 'a second call must not clobber the owner\'s edited file');
+  } finally {
+    await client.close();
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('e2e: --config-dir serves the real business once business.yaml exists', async () => {
+  const { mkdtempSync, copyFileSync, rmSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+
+  const dir = mkdtempSync(join(tmpdir(), 'mainstreet-dir-live-'));
+  copyFileSync(join(examplesDir, 'dental.business.yaml'), join(dir, 'business.yaml'));
+  const transport = new StdioClientTransport({
+    command: process.execPath,
+    args: [cliPath, 'serve', '--config-dir', dir],
+  });
+  const client = new Client({ name: 'mainstreet-e2e-dir-live', version: '0.0.0' });
+  try {
+    await client.connect(transport);
+    const names = (await client.listTools()).tools.map((t) => t.name);
+    assert.ok(names.includes('get_business_profile'), 'real tools should replace the setup tools');
+    assert.ok(!names.includes('create_business_config'), 'setup tools should be gone');
+
+    const profile = await client.callTool({ name: 'get_business_profile', arguments: {} });
+    assert.equal((profile.structuredContent as { industry: string }).industry, 'dental');
+  } finally {
+    await client.close();
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
