@@ -34,7 +34,7 @@ export const serviceAreaCapability: Capability<Config> = {
           'Checks whether a zip code or city is within this business\'s service area. Use before promising on-site service.',
         inputSchema: InputSchema,
         outputSchema: OutputSchema,
-        annotations: { title: 'Check Service Area', readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+        annotations: { title: 'Check Service Area', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
       },
       async ({ location }) => {
         const trimmed = location.trim();

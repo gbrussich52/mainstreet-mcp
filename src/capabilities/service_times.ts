@@ -35,7 +35,7 @@ export const serviceTimesCapability: Capability<Config> = {
         description: 'Returns worship/service times, optionally filtered to one day of the week.',
         inputSchema: InputSchema,
         outputSchema: OutputSchema,
-        annotations: { title: 'Get Service Times', readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+        annotations: { title: 'Get Service Times', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
       },
       async ({ day }) => {
         const services = day ? capabilityConfig.services.filter((s) => s.day === day) : capabilityConfig.services;

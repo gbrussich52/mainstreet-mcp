@@ -67,6 +67,17 @@ const SAMPLE_ARGS: Record<string, Record<string, unknown>> = {
   get_service_times: {},
 };
 
+// Directories (OpenAI's, M8ven's trust index) score a tool down when any of
+// the four behaviour hints is missing, so every tool must declare all four.
+const REQUIRED_HINTS = ['readOnlyHint', 'destructiveHint', 'idempotentHint', 'openWorldHint'] as const;
+function assertAllHints(tools: { name: string; annotations?: Record<string, unknown> }[], label: string): void {
+  for (const tool of tools) {
+    for (const hint of REQUIRED_HINTS) {
+      assert.equal(typeof tool.annotations?.[hint], 'boolean', `${label}: tool ${tool.name} is missing annotations.${hint}`);
+    }
+  }
+}
+
 for (const file of exampleFiles) {
   const industry = file.replace('.business.yaml', '');
 
@@ -90,6 +101,7 @@ for (const file of exampleFiles) {
       assert.ok(tools.length >= UNIVERSAL_TOOLS.length, `${industry}: expected at least the universal tools, got ${tools.map((t) => t.name).join(', ')}`);
 
       const toolNames = tools.map((t) => t.name);
+      assertAllHints(tools, industry);
       for (const name of UNIVERSAL_TOOLS) {
         assert.ok(toolNames.includes(name), `${industry}: missing universal tool ${name}`);
       }
@@ -210,7 +222,9 @@ test('e2e: --config-dir with no business.yaml serves the setup server', async ()
   const client = new Client({ name: 'mainstreet-e2e-setup', version: '0.0.0' });
   try {
     await client.connect(transport);
-    const names = (await client.listTools()).tools.map((t) => t.name).sort();
+    const setupTools = (await client.listTools()).tools;
+    assertAllHints(setupTools, 'setup');
+    const names = setupTools.map((t) => t.name).sort();
     assert.deepEqual(names, ['create_business_config', 'list_industries']);
 
     const listed = await client.callTool({ name: 'list_industries', arguments: {} });

@@ -29,7 +29,7 @@ export const insuranceAcceptedCapability: Capability<Config> = {
         description: 'Checks whether a named insurance carrier is accepted. Returns the full accepted list for reference.',
         inputSchema: InputSchema,
         outputSchema: OutputSchema,
-        annotations: { title: 'Check Insurance Accepted', readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+        annotations: { title: 'Check Insurance Accepted', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
       },
       async ({ insurer }) => {
         const q = insurer.trim().toLowerCase();

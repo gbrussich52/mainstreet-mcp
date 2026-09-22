@@ -11,7 +11,7 @@ export interface UniversalContext {
   inquirySink: InquirySink;
 }
 
-const READ_ONLY = { readOnlyHint: true, idempotentHint: true, openWorldHint: false } as const;
+const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false } as const;
 
 export function registerUniversalTools(server: McpServer, { config, inquirySink }: UniversalContext): void {
   server.registerTool(

@@ -37,7 +37,7 @@ export const menuCapability: Capability<Config> = {
           'Returns the full menu, grouped by category, with prices and dietary/allergen tags. Use this for "what do you serve" style questions instead of guessing.',
         inputSchema: z.object({}),
         outputSchema: OutputSchema,
-        annotations: { title: 'Get Menu', readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+        annotations: { title: 'Get Menu', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
       },
       async () => {
         const active = config.offerings.filter((o) => o.active);

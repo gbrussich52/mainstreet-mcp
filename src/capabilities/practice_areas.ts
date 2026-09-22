@@ -26,7 +26,7 @@ export const practiceAreasCapability: Capability<Config> = {
         description: 'Lists the firm\'s practice areas. Every response must carry the not-legal-advice disclaimer.',
         inputSchema: z.object({}),
         outputSchema: OutputSchema,
-        annotations: { title: 'List Practice Areas', readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+        annotations: { title: 'List Practice Areas', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
       },
       async () => {
         const practice_areas = config.offerings

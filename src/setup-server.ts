@@ -71,6 +71,7 @@ export function createSetupServer(options: SetupServerOptions): McpServer {
       annotations: {
         title: 'List Industries',
         readOnlyHint: true,
+        destructiveHint: false,
         idempotentHint: true,
         openWorldHint: false,
       },
@@ -103,6 +104,7 @@ export function createSetupServer(options: SetupServerOptions): McpServer {
       annotations: {
         title: 'Create Business Config',
         readOnlyHint: false,
+        destructiveHint: false,
         idempotentHint: false,
         openWorldHint: false,
       },

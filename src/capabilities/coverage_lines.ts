@@ -24,7 +24,7 @@ export const coverageLinesCapability: Capability<Config> = {
         description: 'Lists the insurance coverage lines this agency writes (e.g. auto, home, life) and the carriers represented.',
         inputSchema: z.object({}),
         outputSchema: OutputSchema,
-        annotations: { title: 'List Coverage Lines', readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+        annotations: { title: 'List Coverage Lines', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
       },
       async () => {
         const coverage_lines = config.offerings

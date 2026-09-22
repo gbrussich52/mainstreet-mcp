@@ -42,7 +42,7 @@ export const listingsCapability: Capability<Config> = {
         description: 'Searches property listings by free text, price, beds, and status.',
         inputSchema: InputSchema,
         outputSchema: OutputSchema,
-        annotations: { title: 'Search Listings', readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+        annotations: { title: 'Search Listings', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
       },
       async ({ query, max_price, min_beds, status }) => {
         let pool = config.offerings.filter((o) => o.active);

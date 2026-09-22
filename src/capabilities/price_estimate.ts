@@ -36,7 +36,7 @@ export const priceEstimateCapability: Capability<Config> = {
           'Returns a ROUGH price range for a service, always flagged is_estimate:true. Never present this as a firm quote — always relay the disclaimer to the end user.',
         inputSchema: InputSchema,
         outputSchema: OutputSchema,
-        annotations: { title: 'Get Price Estimate', readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+        annotations: { title: 'Get Price Estimate', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
       },
       async ({ offering_id, query }) => {
         const active = config.offerings.filter((o) => o.active);

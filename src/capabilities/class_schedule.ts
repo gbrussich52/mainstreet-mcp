@@ -37,7 +37,7 @@ export const classScheduleCapability: Capability<Config> = {
         description: 'Returns the class/session schedule, optionally filtered to one day of the week.',
         inputSchema: InputSchema,
         outputSchema: OutputSchema,
-        annotations: { title: 'Get Class Schedule', readOnlyHint: true, idempotentHint: true, openWorldHint: false },
+        annotations: { title: 'Get Class Schedule', readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
       },
       async ({ day }) => {
         const classes = day ? capabilityConfig.classes.filter((c) => c.day === day) : capabilityConfig.classes;
