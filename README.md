@@ -1,5 +1,7 @@
 # Main Street MCP
 
+[![M8ven Score](https://m8ven.ai/badge/mcp/gbrussich52/mainstreet-mcp)](https://m8ven.ai/mcp/gbrussich52/mainstreet-mcp)
+
 A free, industry-specific MCP server that gives a small business's AI assistants
 (ChatGPT, Claude, etc.) reliable answers about the business itself — hours, menu/services,
 FAQs, staff, and how to book — instead of hallucinating them. One `business.yaml` file per
