@@ -54,7 +54,7 @@ export function createSetupServer(options: SetupServerOptions): McpServer {
   const { dir } = options;
 
   const server = new McpServer(
-    { name: 'mainstreet-mcp', version: '0.1.2', title: 'Main Street MCP — setup needed' },
+    { name: 'mainstreet-mcp', version: '0.1.3', title: 'Main Street MCP — setup needed' },
     { capabilities: { tools: {} }, instructions: setupInstructions(options) },
   );
 
