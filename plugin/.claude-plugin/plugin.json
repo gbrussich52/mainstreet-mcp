@@ -1,7 +1,7 @@
 {
   "name": "mainstreet",
   "description": "Main Street MCP — free industry starter kit for small businesses. Gives your AI assistant reliable answers about your hours, menu/services, FAQs, staff, and booking from one business.yaml file, plus a setup skill that interviews you and writes it for you.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": {
     "name": "Giani Brussich"
   },

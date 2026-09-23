@@ -240,6 +240,40 @@ test('e2e: --config-dir with no business.yaml serves the setup server', async ()
   }
 });
 
+// The Claude Code plugin passes --config ${CLAUDE_PROJECT_DIR}/business.yaml,
+// which does not exist until setup runs. That used to crash the server, so the
+// plugin showed as failed in every project. A missing business.yaml now serves
+// setup from its folder; any other missing file name is still an error.
+test('e2e: --config pointing at a missing business.yaml serves the setup server', async () => {
+  const { mkdtempSync, rmSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+
+  const dir = mkdtempSync(join(tmpdir(), 'mainstreet-config-missing-'));
+  const transport = new StdioClientTransport({
+    command: process.execPath,
+    args: [cliPath, '--config', join(dir, 'business.yaml')],
+  });
+  const client = new Client({ name: 'mainstreet-e2e-config-missing', version: '0.0.0' });
+  try {
+    await client.connect(transport);
+    const created = await client.callTool({
+      name: 'create_business_config',
+      arguments: { industry: 'salon-spa' },
+    });
+    assert.equal((created.structuredContent as { path: string }).path, join(dir, 'business.yaml'));
+  } finally {
+    await client.close();
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('e2e: --config pointing at a missing non-business.yaml file still fails', async () => {
+  const { spawnSync } = await import('node:child_process');
+  const r = spawnSync(process.execPath, [cliPath, '--config', '/nonexistent/other.yaml'], { encoding: 'utf8' });
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /ENOENT/);
+});
+
 test('e2e: create_business_config writes into the folder and refuses to overwrite', async () => {
   const { mkdtempSync, existsSync, rmSync } = await import('node:fs');
   const { tmpdir } = await import('node:os');

@@ -18,7 +18,7 @@ export function createServer(config: BusinessConfig): McpServer {
   const instructions = `${UNIVERSAL_INSTRUCTIONS}\n\n${preset.instructions}`;
 
   const server = new McpServer(
-    { name: 'mainstreet-mcp', version: '0.1.2', title: `${config.business.name} — Main Street MCP` },
+    { name: 'mainstreet-mcp', version: '0.1.3', title: `${config.business.name} — Main Street MCP` },
     { capabilities: { tools: {} }, instructions },
   );
 

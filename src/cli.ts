@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { existsSync, copyFileSync } from 'node:fs';
 import { createServer as createHttpServer } from 'node:http';
-import { join } from 'node:path';
+import { basename, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { serveStdio } from '@modelcontextprotocol/server/stdio';
 import { createMcpHandler, type McpServer } from '@modelcontextprotocol/server';
@@ -104,8 +104,13 @@ function runValidate(flags: ParsedArgs['flags']): void {
  * start and no way to fix it from inside the app, so we serve the setup server
  * instead and let it write the file into that same folder.
  *
- * With `--config` (the CLI and plugin path) a missing or invalid file is still
- * a hard error: that caller named an exact file and expects it to load.
+ * With `--config` (the CLI and plugin path) an invalid file is still a hard
+ * error: that caller named an exact file and expects it to load. A missing
+ * `business.yaml` is not: the Claude Code plugin points at
+ * ${CLAUDE_PROJECT_DIR}/business.yaml before the owner has one, and crashing
+ * there showed a failed server in every project instead of the setup tools.
+ * Any other missing file name stays an error, since setup can only write
+ * business.yaml.
  */
 function resolveServer(flags: ParsedArgs['flags']): () => McpServer {
   const dir = typeof flags['config-dir'] === 'string' ? flags['config-dir'] : undefined;
@@ -124,6 +129,9 @@ function resolveServer(flags: ParsedArgs['flags']): () => McpServer {
   }
 
   const configPath = typeof flags.config === 'string' ? flags.config : './business.yaml';
+  if (!existsSync(configPath) && basename(configPath) === 'business.yaml') {
+    return () => createSetupServer({ dir: dirname(configPath) });
+  }
   const config = loadConfigFromFile(configPath);
   return () => createServer(config);
 }
