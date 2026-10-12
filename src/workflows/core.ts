@@ -48,7 +48,7 @@ export function analyzeWorkflow(recipe: WorkflowRecipe, input: unknown): Workflo
   if (Object.getPrototypeOf(data) !== Object.prototype && Object.getPrototypeOf(data) !== null) {
     finding('Supply a plain source object.', 'input'); return result;
   }
-  if (Object.keys(data).some(key => !fields[recipe].includes(key)) || fields[recipe].some(key => !Object.hasOwn(data, key))) {
+  if (Object.keys(data).some(key => !fields[recipe].includes(key)) || fields[recipe].some(key => !Object.prototype.hasOwnProperty.call(data, key))) {
     finding('Required source fields are missing or unexpected fields were supplied.', 'input'); return result;
   }
   const asOf = workflowTimestamp(data.asOf), observed = workflowTimestamp(data.observedAt);
