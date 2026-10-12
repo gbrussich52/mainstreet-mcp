@@ -13,7 +13,7 @@
       "registryType": "mcpb",
       "identifier": "https://github.com/gbrussich52/mainstreet-mcp/releases/download/v0.1.4/mainstreet-mcp.mcpb",
       "version": "0.1.4",
-      "fileSha256": "606bf575796088372b9e223f77d13650e09c77573cd369aebd2bf5ddcfb1b06a",
+      "fileSha256": "0a66811c9173a61be1d439819551dd5d5e99325974404dcde24e18373631da9f",
       "transport": {
         "type": "stdio"
       }
