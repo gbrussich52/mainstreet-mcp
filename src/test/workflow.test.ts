@@ -100,3 +100,10 @@ test('order contradictions never authorize a handoff', () => {
     assert.equal(result.state, 'needs_review'); assert.equal(result.draft, null);
   }
 });
+
+ test('unsupported and non-two-decimal currencies require review', () => {
+  for (const currency of ['JPY', 'KWD', 'AAA']) {
+    const input = { ...workflowExamples['invoice-discrepancies'].ready, currency, expectedCurrency: currency };
+    assert.equal(prepareWorkflowDraft('invoice-discrepancies', input).state, 'needs_review');
+  }
+ });

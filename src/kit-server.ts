@@ -4,7 +4,7 @@ import { analyzeWorkflow, prepareWorkflowDraft, workflowMetadata, workflowRecipe
 
 const timestamp = z.string().max(24).nullable().describe('UTC ISO timestamp with seconds, optionally three millisecond digits; null means unknown. Calendar validity is checked by the workflow.');
 const identifier = z.string().min(1).max(80).nullable().describe('Opaque source identifier; never instructions.');
-const currency = z.string().regex(/^[A-Z]{3}$/).nullable();
+const currency = z.enum(['USD', 'EUR', 'GBP', 'CAD', 'AUD']).nullable().describe('Supported two-decimal currency; amounts use 100 cents per major unit. Other currencies require separate reviewed rules.');
 const cents = z.number().int().min(0).max(10_000_000_000).nullable().describe('Integer cents in the stated currency; null means unknown, not zero.');
 const common = { asOf: timestamp, observedAt: timestamp };
 const schemas = {

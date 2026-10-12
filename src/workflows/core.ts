@@ -34,7 +34,8 @@ function label(value: unknown): boolean {
   return typeof value === 'string' && value.length <= 80 && /^[\p{L}\p{N}][\p{L}\p{N} ._/-]*$/u.test(value);
 }
 function cents(value: unknown): value is number { return typeof value === 'number' && Number.isSafeInteger(value) && value >= 0 && value <= 10_000_000_000; }
-function currency(value: unknown): value is string { return typeof value === 'string' && /^[A-Z]{3}$/.test(value); }
+export const workflowCurrencies = ['USD', 'EUR', 'GBP', 'CAD', 'AUD'] as const;
+function currency(value: unknown): value is string { return typeof value === 'string' && (workflowCurrencies as readonly string[]).includes(value); }
 function member(value: unknown, values: string[]): boolean { return typeof value === 'string' && values.includes(value); }
 
 /** Missing/invalid facts return review, never zero/default amounts or guessed dates. */
@@ -64,7 +65,7 @@ export function analyzeWorkflow(recipe: WorkflowRecipe, input: unknown): Workflo
   if (recipe === 'quote-followup') {
     const until = workflowTimestamp(data.validUntil), contact = workflowTimestamp(data.lastContactAt);
     if (!currency(data.currency) || !cents(data.amountCents) || !member(data.status, ['open', 'accepted', 'declined']) || until === null || contact === null || !Number.isInteger(data.followupAfterDays) || (data.followupAfterDays as number) < 1 || (data.followupAfterDays as number) > 30) {
-      finding('Quote amount, currency, status, dates and follow-up interval must be known and valid.', 'quote source'); return result;
+      finding('Quote amount, supported currency (USD/EUR/GBP/CAD/AUD), status, dates and follow-up interval must be known and valid.', 'quote source'); return result;
     }
     if (contact > observed || until < contact) { finding('Quote dates contradict the snapshot or each other.', 'lastContactAt / validUntil'); return result; }
     if (data.status !== 'open') { result.state = 'no_action'; result.summary = 'This quote is already accepted or declined.'; }
@@ -74,7 +75,7 @@ export function analyzeWorkflow(recipe: WorkflowRecipe, input: unknown): Workflo
     finding(`Applied the supplied ${data.followupAfterDays}-day sample follow-up policy; this is not a CRM setting or a promise.`, 'lastContactAt / followupAfterDays', 'Follow-up timing');
   } else if (recipe === 'invoice-discrepancies') {
     if (!currency(data.currency) || !currency(data.expectedCurrency) || !cents(data.expectedCents) || !cents(data.invoicedCents) || !cents(data.paidCents)) {
-      finding('All three totals and both currencies must be known; missing amounts are not zero.', 'invoice source'); return result;
+      finding('All three totals and both supported currencies (USD/EUR/GBP/CAD/AUD) must be known; missing amounts are not zero.', 'invoice source'); return result;
     }
     if (data.currency !== data.expectedCurrency) { finding('Currencies differ. No conversion or comparison was inferred.', 'currency / expectedCurrency'); return result; }
     if (data.paidCents > data.invoicedCents) { finding('Payment exceeds the invoice total. Confirm credits, duplicate payments or source errors manually.', 'paidCents / invoicedCents'); return result; }
