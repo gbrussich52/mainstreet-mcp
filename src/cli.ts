@@ -10,6 +10,8 @@ import { loadConfigFromFile, ConfigError } from './config/load.js';
 import { INDUSTRIES } from './config/schema.js';
 import { createServer } from './server.js';
 import { createSetupServer } from './setup-server.js';
+import { createKitServer } from './kit-server.js';
+import { workflowRecipes, type WorkflowRecipe } from './workflows/core.js';
 
 interface ParsedArgs {
   flags: Record<string, string | boolean>;
@@ -41,6 +43,7 @@ function printUsage(): void {
   console.error(
     [
       'Usage:',
+      '  mainstreet-mcp kit <id>                        serve a stateless workflow kit over stdio',
       '  mainstreet-mcp [--config <path>]                serve over stdio (default)',
       '  mainstreet-mcp serve [--config-dir <dir>]      serve business.yaml from a folder,',
       '                                                 falling back to setup if it is absent',
@@ -164,6 +167,16 @@ async function main(): Promise<void> {
 
   if (flags.help || command === 'help') {
     printUsage();
+    return;
+  }
+  if (command === 'kit') {
+    const recipe = positionals[1];
+    if (positionals.length !== 2 || Object.keys(flags).length !== 0 || !workflowRecipes.includes(recipe as WorkflowRecipe)) {
+      console.error(`kit requires one recipe and no flags: ${workflowRecipes.join(', ')}`);
+      process.exitCode = 1;
+      return;
+    }
+    serveStdio(() => createKitServer(recipe as WorkflowRecipe));
     return;
   }
   if (command === 'init') {

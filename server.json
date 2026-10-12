@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.gbrussich52/mainstreet-mcp",
-  "description": "Free small-business starter kit: hours, services, FAQs, booking and inquiries from one YAML file.",
-  "version": "0.1.2",
-  "websiteUrl": "https://github.com/gbrussich52/mainstreet-mcp#readme",
+  "description": "Free small-business facts and stateless workflow review kits: quotes, invoices and order handoffs.",
+  "version": "0.1.4",
+  "websiteUrl": "https://nyclaw.io/ai-workflows",
   "repository": {
     "url": "https://github.com/gbrussich52/mainstreet-mcp",
     "source": "github"
@@ -11,9 +11,17 @@
   "packages": [
     {
       "registryType": "mcpb",
-      "identifier": "https://github.com/gbrussich52/mainstreet-mcp/releases/download/v0.1.2/mainstreet-mcp.mcpb",
-      "version": "0.1.2",
-      "fileSha256": "3b7c85c6c825f769bd29563c7ac5265c7af0760203b6b2b3597c8d68a2e7f8c6",
+      "identifier": "https://github.com/gbrussich52/mainstreet-mcp/releases/download/v0.1.4/mainstreet-mcp.mcpb",
+      "version": "0.1.4",
+      "fileSha256": "0a66811c9173a61be1d439819551dd5d5e99325974404dcde24e18373631da9f",
+      "transport": {
+        "type": "stdio"
+      }
+    },
+    {
+      "registryType": "npm",
+      "identifier": "mainstreet-mcp",
+      "version": "0.1.4",
       "transport": {
         "type": "stdio"
       }
