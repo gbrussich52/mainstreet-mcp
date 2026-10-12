@@ -1,7 +1,7 @@
 {
   "name": "mainstreet-mcp",
-  "version": "0.1.3",
-  "description": "Main Street MCP — free industry starter kit MCP server for small businesses",
+  "version": "0.1.4",
+  "description": "Main Street MCP \u2014 free industry starter kit MCP server for small businesses",
   "type": "module",
   "bin": {
     "mainstreet-mcp": "./dist/cli.js"
@@ -13,7 +13,8 @@
     "!dist/test",
     "examples",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "scripts/verify-kit.mjs"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",

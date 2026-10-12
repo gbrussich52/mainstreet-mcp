@@ -218,3 +218,23 @@ Presets, capabilities, universal tools, CLI, and all 10 example configs are buil
 verified (build, unit tests, E2E stdio tests, CLI validate success/failure paths, and an
 HTTP smoke test all pass — see the build's final report for exact output). This is a
 first build, not yet published or deployed anywhere.
+
+## Workflow kits: caller-supplied facts to a review packet
+
+Version 0.1.4 adds three stateless kits. Each exposes exactly two tools: `analyze_workflow` and `prepare_workflow_draft`. They evaluate supplied structured facts with explicit sample policies and prepare an unsent review draft when inputs are adequate. No provider account, live source verification, storage, messages, money movement or fulfillment changes are included. Your MCP host may send tool inputs to its model provider; use fictional inputs first and follow your organization's data rules.
+
+```sh
+npx -y mainstreet-mcp@0.1.4 kit quote-followup
+npx -y mainstreet-mcp@0.1.4 kit invoice-discrepancies
+npx -y mainstreet-mcp@0.1.4 kit order-handoff
+```
+
+Use one kit per configured MCP server. [Try the fictional demos](https://nyclaw.io/ai-workflows) and [request a scoped implementation](https://nyclaw.io/services). These free kits do not include connected customer systems. Check native CRM, accounting or order software before commissioning a custom integration.
+
+```json
+{ "mcpServers": { "quote-review": { "command": "npx", "args": ["-y", "mainstreet-mcp@0.1.4", "kit", "quote-followup"] } } }
+```
+
+Ask: “Review this quote using the supplied timestamps and follow-up policy. Prepare a draft only if the tool says it is ready.” Send all required fields from the published tool schema, using null for unknown facts. `needs_review` means verify sources; `no_action` means no draft is warranted under the supplied facts/policy. Example inputs and expected states are bundled in `dist/workflows/core.js`. Amounts use integer cents, currencies must match, and dates use UTC ISO seconds or three millisecond digits. The seven-day freshness window and paid-before-production rule are sample policies to review for your business. `asOf` is supplied by the caller, not a live clock or verification timestamp.
+
+These CLI kits use stdio with a compatible MCP host. The desktop bundle retains the original business setup flow; it does not automatically enable workflow kits. Changing the command selects a kit. See the demo's install instructions for exact host configuration.
