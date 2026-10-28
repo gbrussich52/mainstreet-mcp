@@ -3,9 +3,15 @@
 [![M8ven Score](https://m8ven.ai/badge/mcp/gbrussich52-mainstreet-mcp-1iz3xg?v=3c7db0109c32a8e30bc50ca4ee227ae9)](https://m8ven.ai/mcp/gbrussich52-mainstreet-mcp-1iz3xg)
 
 A free, industry-specific MCP server that gives a small business's AI assistants
-(ChatGPT, Claude, etc.) reliable answers about the business itself — hours, menu/services,
-FAQs, staff, and how to book — instead of hallucinating them. One `business.yaml` file per
-business; no code changes required to run it.
+(such as Claude Desktop and Claude Code) configured facts about hours, menu/services,
+FAQs, staff and booking. One `business.yaml` file per business; no code changes required
+to run it. Answers depend on the accuracy of that file and the assistant using it.
+
+The published package supports compatible local MCP clients over stdio. It is not a
+hosted ChatGPT app or connector. The optional HTTP mode listens on loopback and validates
+localhost Host/Origin headers; remote hosting, authentication and client compatibility
+must be configured and verified separately. A reverse proxy alone does not establish
+those requirements.
 
 ## Quickstart (business owner)
 
@@ -47,14 +53,16 @@ business; no code changes required to run it.
    }
    ```
 
-   To serve over HTTP instead (e.g. for a hosted deployment), run:
+   To test the business server over local HTTP instead, run:
 
    ```
    npx -y mainstreet-mcp serve --http --port 3000
    ```
 
    The HTTP server only binds to `127.0.0.1` and validates the `Host`/`Origin` headers on
-   every request — put a reverse proxy in front of it for anything beyond local testing.
+   every request. No public endpoint, remote authentication or hosted deployment is
+   included. A remote deployment needs a separate review of those controls and the
+   intended client's transport requirements.
 
 ## What it gives an AI assistant
 
@@ -77,14 +85,14 @@ tool modules — matched to that industry:
 | Industry | Capabilities / tools |
 |---|---|
 | restaurant | `menu` → `get_menu` |
-| dental | `insurance_accepted` → `check_insurance_accepted` |
+| dental | `insurance_accepted` → `check_insurance_accepted`, `price_estimate` → `get_price_estimate` |
 | law-firm | `practice_areas` → `list_practice_areas` (always carries a not-legal-advice disclaimer) |
 | home-services | `service_area` → `check_service_area`, `price_estimate` → `get_price_estimate` |
-| salon-spa | `class_schedule` → `get_class_schedule` |
+| salon-spa | `price_estimate` → `get_price_estimate`, `class_schedule` → `get_class_schedule` |
 | fitness-studio | `class_schedule` → `get_class_schedule` |
-| real-estate-agent | `listings` → `search_listings` |
+| real-estate-agent | `listings` → `search_listings`, `service_area` → `check_service_area` |
 | auto-repair | `service_area`, `price_estimate`, `insurance_accepted` |
-| insurance-agency | `coverage_lines` → `list_coverage_lines` |
+| insurance-agency | `coverage_lines` → `list_coverage_lines`, `service_area` → `check_service_area` |
 | church | `service_times` → `get_service_times` |
 
 Every tool ships an `outputSchema` and returns `structuredContent`, so a calling agent gets
@@ -133,7 +141,8 @@ Install the bundled plugin, which registers the MCP server and adds a `setup-my-
 skill that interviews you and writes `business.yaml` for you:
 
 ```
-claude plugin install ./plugin
+claude plugin marketplace add gbrussich52/mainstreet-mcp
+claude plugin install mainstreet@mainstreet
 ```
 
 The plugin's MCP config expects `business.yaml` at your project root
@@ -216,8 +225,13 @@ dependencies are pinned to exact versions (no `^`).
 
 Presets, capabilities, universal tools, CLI, and all 10 example configs are built and
 verified (build, unit tests, E2E stdio tests, CLI validate success/failure paths, and an
-HTTP smoke test all pass — see the build's final report for exact output). This is a
-first build, not yet published or deployed anywhere.
+HTTP smoke test all pass — see the build's final report for exact output). Version
+0.1.4 is published on [npm](https://www.npmjs.com/package/mainstreet-mcp), in the
+[GitHub release](https://github.com/gbrussich52/mainstreet-mcp/releases/tag/v0.1.4)
+and in the official MCP registry as `io.github.gbrussich52/mainstreet-mcp`.
+These are package distribution channels; they do not provide a hosted endpoint or
+prove a particular customer's integration. The desktop bundle opens business setup;
+workflow kits use the CLI configuration below.
 
 ## Workflow kits: caller-supplied facts to a review packet
 
