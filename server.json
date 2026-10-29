@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.gbrussich52/mainstreet-mcp",
   "description": "Free small-business facts and stateless workflow review kits: quotes, invoices and order handoffs.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "websiteUrl": "https://nyclaw.io/ai-workflows",
   "repository": {
     "url": "https://github.com/gbrussich52/mainstreet-mcp",
@@ -11,9 +11,9 @@
   "packages": [
     {
       "registryType": "mcpb",
-      "identifier": "https://github.com/gbrussich52/mainstreet-mcp/releases/download/v0.1.4/mainstreet-mcp.mcpb",
-      "version": "0.1.4",
-      "fileSha256": "0a66811c9173a61be1d439819551dd5d5e99325974404dcde24e18373631da9f",
+      "identifier": "https://github.com/gbrussich52/mainstreet-mcp/releases/download/v0.1.5/mainstreet-mcp.mcpb",
+      "version": "0.1.5",
+      "fileSha256": "e118d5cef7c1f25e4fd65af704d1eafbd2c0780e45498cf3172065c8075456c2",
       "transport": {
         "type": "stdio"
       }
@@ -21,7 +21,7 @@
     {
       "registryType": "npm",
       "identifier": "mainstreet-mcp",
-      "version": "0.1.4",
+      "version": "0.1.5",
       "transport": {
         "type": "stdio"
       }
