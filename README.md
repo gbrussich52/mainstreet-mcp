@@ -221,6 +221,10 @@ dependencies are pinned to exact versions (no `^`).
 - `serve --http` binds a local port, which some sandboxed shells block by default; test it
   outside such a sandbox if `EPERM`/`listen` errors appear.
 
+The `submit_inquiry` tool advertises `openWorldHint: true` when configured for webhook
+delivery and `false` for local file delivery. It remains a non-idempotent write tool
+in both modes.
+
 ## Status
 
 Presets, capabilities, universal tools, CLI, and all 10 example configs are built and

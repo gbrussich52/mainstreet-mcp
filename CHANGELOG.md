@@ -1,3 +1,22 @@
+# 0.1.5 — Inquiry annotation accuracy
+
+`submit_inquiry` previously advertised `openWorldHint: false` for every sink, even
+when configured to forward messages to an external webhook. It now advertises
+`true` in webhook mode and `false` in file mode. The other behavior hints and inquiry
+delivery, screening and rate limiting are unchanged. This package also includes the
+October 28 README corrections below; the published 0.1.4 tarball predates them.
+
+The native npm audit also identified six vulnerable dependencies in the previous
+lockfiles. Exact direct pins now use MCP node 2.1.2, server/client 2.4.0 and Zod
+4.6.7; both root and desktop lockfiles resolve Hono 4.13.14 and its Node adapter
+2.1.5. These compatible updates repair the advisories without changing the CLI or
+adding services. Both native audits now report zero vulnerabilities.
+
+Validation: discovery-only regression tests inspect both modes using a real MCP
+stdio client without submitting an inquiry. The file case includes a webhook URL
+to prove that the configured mode controls the hint. Existing tests and package
+readback cover the unchanged business/setup/workflow surfaces.
+
 # 2026-10-28 — Documentation accuracy
 
 The README previously described the released package as unpublished and implied broad

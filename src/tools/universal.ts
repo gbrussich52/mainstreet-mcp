@@ -233,7 +233,7 @@ export function registerUniversalTools(server: McpServer, { config, inquirySink 
         reason: z.string().optional(),
         id: z.string().optional(),
       }),
-      annotations: { title: 'Submit Inquiry', readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: false },
+      annotations: { title: 'Submit Inquiry', readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: config.inquiries.mode === 'webhook' },
     },
     async (input) => {
       const result = await inquirySink.submit(input);
